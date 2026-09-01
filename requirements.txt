@@ -1,0 +1,21 @@
+numpy>=1.26
+scipy>=1.11
+pytest>=7.4
+
+# plotting.py imports matplotlib at module level -- a hard requirement, not
+# optional: importing that module without it is an ImportError.
+matplotlib>=3.8
+
+# export.py imports h5py lazily, inside the functions that need it, and guards
+# every use with hdf5_available(); the HDF5 paths raise a clear ImportError
+# pointing at the CSV alternative when it is absent. So h5py is genuinely
+# optional -- listed here because the shipped code does use it and the default
+# install should be complete, but the package remains usable without it.
+h5py>=3.10
+
+# DERIVATION ONLY -- not imported by stochastic_ctmc, not needed to run the
+# package or the test suite. scripts/verify_covariance_identity.py uses it to
+# re-derive the adjacent-dwell covariance identity in exact symbolic arithmetic,
+# which is what backs the manuscript's claim that the identity is proved rather
+# than fitted. Skip it if you only want to run the library.
+sympy>=1.12
